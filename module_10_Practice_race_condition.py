@@ -6,10 +6,22 @@ import threading
 
 x = 0
 
-def thread_task(n):
+def thread_task_no_lock(n):
     global x
     for _ in range(n):
         x = x + 1
+
+lock1 = threading.Lock()
+def thread_task(n):
+    global x
+    for _ in range(n):
+        lock1.acquire()
+        x = x + 1
+        lock1.release()
+
+# или
+#     with lock...
+#         x += 1
 
 def main():
     t1 = threading.Thread(target=thread_task, args=(1_000_000,))
