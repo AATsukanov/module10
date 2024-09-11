@@ -27,7 +27,7 @@ if __name__ == '__main__':
     data = ['./images/'+fname for fname in os.listdir('./images/') if '.png' in fname]
 
     resize_process = mp.Process(target=resize_image, args=(data, queue))
-    change_process = mp.Process(target=change_color_and_save, args=(queue, )) #кортеж на входе поэтому (.., )
+    change_process = mp.Process(target=change_color_and_save, args=(queue, )) #кортеж на входе, поэтому (.., )
 
     resize_process.start()
     change_process.start()
